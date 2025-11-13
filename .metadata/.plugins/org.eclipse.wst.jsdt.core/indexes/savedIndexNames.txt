@@ -1,0 +1,7 @@
+INDEX VERSION 1.4+C:\Users\7Java7\Desktop\Dairyreport\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+3263892429.index
+2544969091.index
+1373911063.index
+1833310708.index
+454126093.index
+1496176475.index

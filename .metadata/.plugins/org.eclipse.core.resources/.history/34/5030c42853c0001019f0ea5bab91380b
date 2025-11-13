@@ -1,0 +1,23 @@
+package dao;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+public class UserDAO {
+	
+	public User findUser(String userId, String password) { // ログイン
+		String sql = "SELECT * FROM user_table WHERE user_id = ? AND password = ?";
+		try(Connection con = DBConnection.getConnection();
+				PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setString(1, userId);
+			ps.setString(2, password);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()) {
+				return new User(rs.getString("user_id"), rs.getString("password"), rs.getString("userName"));
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} return null;
+	}
+
+}
