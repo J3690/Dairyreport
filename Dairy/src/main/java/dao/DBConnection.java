@@ -6,10 +6,14 @@ import java.sql.SQLException;
 
 public class DBConnection {
 	public static Connection getConnection() throws SQLException {
-		String url = "";
-		String user = "";
+		// public :  他クラスから自由に呼び出せる
+		// static :  インスタンス化しなくてもOK
+		// throws SQLException  :  DB 接続エラーの際、呼び出し側に対応してもらう
+		String url = "jdbc:h2:~/Dairy";
+		String user = "sa";
 		String pass = "";
 		return DriverManager.getConnection(url, user, pass);
+		// 指定した (url, user, pass) で DB 接続するメソッド
+		// 成功すると Connection オブジェクトを返す
 	}
-
 }

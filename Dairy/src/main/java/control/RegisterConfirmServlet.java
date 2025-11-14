@@ -1,0 +1,38 @@
+package control;
+
+import java.io.IOException;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+import dao.UserDAO;
+import model.User;
+
+@WebServlet("/RegisterConfirmServlet")
+public class RegisterConfirmServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		String userId = request.getParameter("userid");
+		String password = request.getParameter("password");
+		String userName = request.getParameter("username");
+		// HTML のフォーム入力を取り出す
+		
+		UserDAO dao = new UserDAO();
+		boolean result = dao.inserUser(new User(userId, password, userName));
+		// 登録成功 : True、失敗 : False
+		
+		if(result) { // 成功の場合
+			request.setAttribute("message", "登録しました");
+			request.getRequestDispatcher("success.jsp").forward(request, response);
+		} else { // 失敗の場合
+			request.setAttribute("error", "登録に失敗しました");
+			request.getRequestDispatcher("error.jsp").forward(request, response);
+		}
+	}
+
+}

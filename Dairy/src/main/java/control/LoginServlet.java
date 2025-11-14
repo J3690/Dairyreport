@@ -15,21 +15,22 @@ import model.User;
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	}
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String userId = request.getParameter("userid");
-		String password = request.getParameter("pass");
+		String password = request.getParameter("password");
+		//  フォーム入力を取得
 		
 		UserDAO dao = new UserDAO();
 		User user = dao.findUser(userId, password);
+		// DB にユーザーが存在するか確認
+		// 存在→User オブジェクトを返す、いない→null
 		
-		if(user != null) { /* ログイン時の Userid と Password のチェック */
+		/* ログイン時の Userid と Password のチェック */
+		if(user != null) { // ログイン成功の場合
 			request.setAttribute("user", user);
 			request.getRequestDispatcher("success.jsp").forward(request, response); // ログイン成功
-		} else { /* Userid か Password が間違って場合 */
+		} else { /* Userid か Password が間違ってる場合 */
 			request.setAttribute("error", "ユーザー ID またはパスワードが間違っています");
 			request.getRequestDispatcher("login.jsp").forward(request, response); // 間違った場合もう一度ログイン画面表示
 		}

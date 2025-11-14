@@ -1,0 +1,37 @@
+package control;
+
+import java.io.IOException;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+import dao.UserDAO;
+
+@WebServlet("/changePasswordServlet")
+public class changePasswordServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		String userId = request.getParameter("userid");
+		String userName = request.getParameter("username");
+		
+		UserDAO dao = new UserDAO();
+		if(dao.verifyUser(userId, userName)) { // DB でユーザーが存在するか確認
+			request.setAttribute("userId", userId);
+			request.setAttribute("userName", userName);
+			// setAttribute は JSP に値を渡す処理
+			request.getRequestDispatcher("changePasswordConfirm.jsp").forward(request, response);
+		} else { 
+			request.setAttribute("error", "ユーザー ID またはユーザーネームが間違っています");
+			request.getRequestDispatcher("changePassword.jsp").forward(request, response);
+		}
+	}
+
+}
