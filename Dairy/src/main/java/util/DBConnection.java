@@ -1,0 +1,26 @@
+package util;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+public class DBConnection {
+	private static final String DRIVER = "org.h2.Driver";
+	private static final String URL = "jdbc:h2:~/Dairy";
+	private static final String USER = "sa";
+	private static final String PASS = "";
+	
+	public static Connection getConnection() {
+		// public :  他クラスから自由に呼び出せる
+		// static :  インスタンス化しなくてもOK
+		
+		Connection con = null;
+		try {
+			Class.forName(DRIVER);
+			con = DriverManager.getConnection(URL, USER, PASS);
+		// 指定した (url, user, pass) で DB 接続するメソッド
+		// 成功すると Connection オブジェクトを返す
+	} catch(Exception e) {
+		e.printStackTrace();
+		} return null;
+	}
+}

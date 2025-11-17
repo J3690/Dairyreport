@@ -1,0 +1,28 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+	</head>
+
+	<body>
+		<form action="../../password" method="post">
+			<input type="hidden" name="action" value="check">
+			
+			User ID : <input type="text" name="userid"> <br>
+			User Name : <input type="text" name="name"> <br>
+			
+			<input type="text" value="確認">
+		</form>
+		
+		<% String error = (String) request.getAttribute("error");  %>
+		<% if(error != null) {  %>
+			<p style="color:red;"> <%= error %> </p>
+		<% }  %>
+		
+		<a href="../login/login.jsp"> ログイン画面へ </a>
+	</body>
+</html>

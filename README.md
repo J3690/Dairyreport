@@ -34,27 +34,28 @@ Java / JSP / Servlet / SQL を用いて開発した Web アプリケーション
 ### 11/14 ログイン機能
 LoginApp/
 ├─ src/
-│  ├─ controller/
+│  ├─ controller/ (Servlet)
 │  │   ├─ LoginServlet.java
 │  │   ├─ RegisterServlet.java
 │  │   ├─ RegisterConfirmServlet.java
 │  │   ├─ ChangePasswordServlet.java
 │  │   └─ ChangePasswordConfirmServlet.java
-│  ├─ model/
+│  ├─ model/ (DAO, DTO)
 │  │   ├─ User.java
 │  │   └─ UserDAO.java
-│  └─ util/
+│  └─ util/ (共通ロジック)
 │      └─ DBConnection.java
 │
-├─ WebContent/
-│  ├─ login.jsp
-│  ├─ register.jsp
-│  ├─ registerConfirm.jsp
-│  ├─ changePassword.jsp
-│  ├─ changePasswordConfirm.jsp
-│  ├─ success.jsp
-│  ├─ error.jsp
-│  └─ WEB-INF/
+├─ WEB-INF/
+│  ├─jsp
+│  │  ├─ login.jsp
+│  │  ├─ register.jsp
+│  │  ├─ registerConfirm.jsp
+│  │  ├─ changePassword.jsp
+│  │  ├─ changePasswordConfirm.jsp
+│  │  ├─ success.jsp
+│  │  ├─ error.jsp
+│  └─lib
 
 ---------------
 

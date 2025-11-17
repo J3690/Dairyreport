@@ -1,0 +1,32 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>ログイン</title>
+	</head>
+
+	<body>
+		<h2>ログイン</h2>
+		<form action="../../login" method="post">
+			User ID : <input type="text" name="userid"> <br>
+			Password : <input type="password" name="password"> <br>
+			<input type="submit" value="ログイン">
+		</form>
+		
+		<% String err = (String)request.getAttribute("error"); %>
+		<% if(err != null) { %>
+			<p style="color:red;"> <%= err %> </p>
+		<% }  %>
+		
+		<form action="changePassword.jsp" method="get">
+			<input type="submit" value="パスワード変更">
+		</form>
+		
+		<p style="color:red;">
+			<%= request.getAttribute("error") == null ? "" : request.getAttribute("error") %>
+		</p>
+	</body>
+</html>

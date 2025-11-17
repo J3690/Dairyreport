@@ -1,0 +1,94 @@
+package model;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+
+import util.DBConnection;
+
+public class ReportDAO {
+	public boolean insert(Report report) {
+		String sql ="INSERT INTO reports(userid, date, start_time, end_time, work_am, work_pm, comment)" + "VALUES(?, ?, ?, ?, ?, ?, ?)";
+		try(Connection con = DBConnection.getConnection();
+				PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setString(1, report.getUserid());
+			ps.setDate(2, report.getDate());
+			ps.setTime(3, report.getStarttime());
+			ps.setTime(4, report.getEndtime());
+			ps.setString(5, report.getWorkAM());
+			ps.setString(6, report.getWorkPM());
+			ps.setString(7, report.getComment());
+			
+			return ps.executeUpdate()== 1;
+			} catch(Exception e) {
+				e.printStackTrace();
+			} return false;
+	}
+	
+	// 一覧取得
+	public ArrayList<Report> findAll(String userid) {
+		ArrayList<Report> list = new ArrayList<>();
+		
+		String sql = "SELECT * FROM reports WHERE user_id = ? ORDER BY date DESC";
+		try(Connection con = DBConnection.getConnection();
+				PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setString(1, userid);
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				Report r = new Report();
+				r.setId(rs.getInt("id"));
+				r.setUserid(rs.getString("userid"));
+				r.setDate(rs.getDate("date"));
+				r.setStarttime(rs.getTime("start_time"));
+				r.setEndtime(rs.getTime("end_time"));
+				r.setWorkAM(rs.getString("work_AM"));
+				r.setWorkPM(rs.getString("work_PM"));
+				r.setComment(rs.getString("comment"));
+				list.add(r);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} return list;
+	}
+	
+	// 詳細表示
+	public Report findById(int id) {
+		String sql = "SELECT * FROM reports WHERE id = ?";
+		try(Connection con = DBConnection.getConnection();
+				PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				Report r = new Report();
+				r.setId(rs.getInt("id"));
+				r.setUserid(rs.getString("userid"));
+				r.setDate(rs.getDate("date"));
+				r.setStarttime(rs.getTime("start_time"));
+				r.setEndtime(rs.getTime("end_time"));
+				r.setWorkAM(rs.getString("work_AM"));
+				r.setWorkPM(rs.getString("work_PM"));
+				r.setComment(rs.getString("comment"));
+				return r;
+			} catch(Exception e) {
+				e.printStackTrace();
+			} return null;
+		}
+		
+		// ログアウト時のデータ削除
+		public boolean deleteByUser(String userid) {
+			String sql = "DELETE FROM reports WHERE user_id = ?";
+			try(Connection con = DBConnection.getConnection();
+					PreparedStatement ps = con.prepareStatement(sql)) {
+				ps.setString(1, userid);
+				ps.executeUpdate();
+				return true;
+			} catch(Exception e) {
+				e.printStackTrace();
+			} return false;
+		}
+	}
+
+}

@@ -1,25 +1,24 @@
 package model;
 
 public class User {
-	private String userId;
-	private String userName;
+	private String userid;
+	private String username;
 	private String password;
 	
 	public User() {}
 	
-	public User(String userId, String userName, String password) {
-		this.userId = userId;
-		this.userName = userName;
+	public User(String userid, String username, String password) {
+		this.userid = userid;
+		this.username = username;
 		this.password = password;
 	}
 	
-	public String getUserId() { return this.userId; }
-	public void setUserId(String userId) { this.userId = userId; }
-	
-	public String getUserName() { return this.userName; }
-	public void setUserName(String userName) { this.userName = userName; }
-	
+	public String getUserid() { return this.userid; }
+	public String getUsername() { return this.username; }
 	public String getPassword() { return this.password; }
+	
+	public void setUserid(String userId) { this.userid = userId; }
+	public void setUsername(String userName) { this.username = userName; }
 	public void setPassword(String password) { this.password = password; }
 
 }

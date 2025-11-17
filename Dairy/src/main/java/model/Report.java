@@ -1,0 +1,47 @@
+package model;
+
+import java.sql.Date;
+import java.sql.Time;
+
+public class Report {
+	private int id;
+	private String userid;
+	private Date date;
+	private Time starttime;
+	private Time endtime;
+	private String workAM;
+	private String workPM;
+	private String comment;
+	
+	public Report() { }
+	
+	public Report(int id, String userid, Date date, Time starttime, Time endtime, String workAM, String workPM, String comment) {
+		this.id = id;
+		this.userid = userid;
+		this.date = date;
+		this.starttime = starttime;
+		this.endtime = endtime;
+		this.workAM = workAM;
+		this.workPM = workPM;
+		this.comment = comment;
+	}
+	
+	public int getId() { return id; }
+	public String getUserid() { return userid; }
+	public Date getDate() { return date; }
+	public Time getStarttime() { return starttime; }
+	public Time getEndtime() { return endtime; }
+	public String getWorkAM() { return workAM; }
+	public String getWorkPM() { return workPM; }
+	public String getComment() { return comment; }
+	
+	public void setId(int id) { this.id = id; }
+	public void setUserid(String userid) { this.userid = userid; }
+	public void setDate(Date date) { this.date = date; }
+	public void setStarttime(Time starttime) { this.starttime = starttime; }
+	public void setEndtime(Time endtime) { this.endtime = endtime; }
+	public void setWorkAM(String workAM) { this.workAM = workAM; }
+	public void setWorkPM(String workPM) { this.workPM = workPM; }
+	public void setComment(String comment) { this.comment = comment; }
+
+}
